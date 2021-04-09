@@ -6,12 +6,33 @@ data = {
     'chris': 'chrispass',
     'mbah': 'mbahpass',
 }
+
+
+def register():
+    list = []
+    name = input('please enter username')
+    name = name.capitalize()
+    if name in data:
+        print('username exist!')
+        print('please try another user name')
+        register()
+    else:
+        password = input('please enter password')
+        #new = f'{name}:{password}'.split(':')
+        list.append(name)
+        list.append(password)
+        data[list[0]] = list[1]
+        print(list)
+        print('sucessfully registered you can login to perform operations')
+        login()
+
+
 def login():
     name = input('enter your username\n')
     password = input('enter your password to your username\n')
 
     if (name in data and password == data[name]):
-        print('welcome Mr %s\n' %name)
+        print('welcome  %s\n' %name)
         print(currentDate.strftime('%d %b, %Y\n\n'))
         return True
     else:
@@ -19,6 +40,8 @@ def login():
         print('PLEASE ENTER VALID USERNAME AND PASSWORD!')
         login()
         return True
+
+
 
 def logout():
     print('Are you Sure you want to logout of this account')
@@ -71,11 +94,19 @@ def operation():
         print('error please enter an interger type number')
 
 
+print('welcome to ATM machine \n')
+print('login if tou already have an account or register yourself\n')
+try:
+    option = int(input('please enter 1 to login or 2 to register\n'))
 
-isLoggedIn = False
+    if option ==1:
+        isLoggedIn = False
+        if isLoggedIn == False:
+             isLoggedIn = login()
 
-if isLoggedIn == False:
-  isLoggedIn = login()
-
-if isLoggedIn == True:
-  operation()
+        if isLoggedIn == True:
+          operation()
+    elif option == 2:
+        register()
+except ValueError:
+    print('enter either 1 or 2')
