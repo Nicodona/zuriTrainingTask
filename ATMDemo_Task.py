@@ -22,7 +22,6 @@ def register():
         list.append(name)
         list.append(password)
         data[list[0]] = list[1]
-        print(list)
         print('sucessfully registered you can login to perform operations')
         login()
 
@@ -33,7 +32,12 @@ def login():
 
     if (name in data and password == data[name]):
         print('welcome  %s\n' %name)
-        print(currentDate.strftime('%d %b, %Y\n\n'))
+        print(currentDate.strftime('%d %b, %Y\n'))
+        firstName = name[:3].upper()
+        ac = str(id(name))
+        number = '100003'
+        accountNumber = number+ac+firstName
+        print('your ACCOUNT NUMBER is {}\n'.format(accountNumber))
         return True
     else:
         print('your username or password do not match please try again')
@@ -41,7 +45,7 @@ def login():
         login()
         return True
 
-
+# 139997629232432
 
 def logout():
     print('Are you Sure you want to logout of this account')
@@ -101,7 +105,7 @@ try:
 
     if option ==1:
         isLoggedIn = False
-        if isLoggedIn == False:
+        while isLoggedIn == False:
              isLoggedIn = login()
 
         if isLoggedIn == True:
