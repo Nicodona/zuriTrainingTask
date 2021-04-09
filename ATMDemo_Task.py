@@ -1,3 +1,5 @@
+import datetime
+currentDate = datetime.date.today()
 data = {
     'nico': 'nicopass',
     'paul': 'paulpass',
@@ -9,11 +11,25 @@ def login():
     password = input('enter your password to your username\n')
 
     if (name in data and password == data[name]):
-        print('welcome Mr %s' %name)
+        print('welcome Mr %s\n' %name)
+        print(currentDate.strftime('%d %b, %Y\n\n'))
         return True
     else:
         print('your username or password do not match please try again')
-        return  False
+        print('PLEASE ENTER VALID USERNAME AND PASSWORD!')
+        login()
+        return True
+
+def logout():
+    print('Are you Sure you want to logout of this account')
+    logout = input("enter 'yes' to comfirm logout or 'cancel' to remain signin\n")
+    if logout.lower() == 'yes':
+        print('you have successfully to logout\n\n')
+
+    elif logout == 'cancel':
+        operation()
+
+
 
 def operation():
     print('select option you want to do in your account')
@@ -28,22 +44,24 @@ def operation():
             if option == 1:
                 withdraw = int(input('how much will you like to withdraw\n'))
                 print(f'take your cash  {withdraw}\n\n')
+                print('YOU MAY WANT TO PERFORM ANOTHER OPERATION\n')
+                operation()
 
 
             elif option == 2:
                 deposit = int(input('how much will you like to deposit?\n'))
                 print(f'successfully {deposit} into accountbalance is\n\n')
+                print('YOU MAY WANT TO PERFORM ANOTHER OPERATION\n')
+                operation()
 
             elif option == 3:
                 complaint = input('what issue will you like to report?')
                 print('thank you for contacting us\n\n')
+                print('YOU MAY WANT TO PERFORM ANOTHER OPERATION\n')
+                operation()
 
             elif option == 4:
-                print('Are you Sure you want to logout of this account')
-                logout = input("enter 'yes' to comfirm logout or 'cancel' to remain signin\n")
-                if logout.lower() =='yes':
-                    print('you have successfully to logout\n\n')
-                    return login()
+                logout()
 
             else:
                 print('invalid input ')
@@ -59,5 +77,5 @@ isLoggedIn = False
 if isLoggedIn == False:
   isLoggedIn = login()
 
-while isLoggedIn == True:
+if isLoggedIn == True:
   operation()
